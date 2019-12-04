@@ -5,13 +5,6 @@ def CalcFuel(mass):
     print(fuel)
     return fuel
 
-def SumCalcFuel(mass):
-    fuel = math.floor(mass / 3) - 2
-    if (fuel < 0):
-        return 0
-    else:
-        return SumCalcFuel(mass) + fuel
-
 
 # UnitTest
 arr = [12, 14, 1969, 100756]
