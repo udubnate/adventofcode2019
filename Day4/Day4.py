@@ -1,7 +1,11 @@
-numrange = "12343-12346"
+import logging
+logger = logging.getLogger()
+logging.basicConfig(level=logging.ERROR, format='%(asctime)s - %(levelname)s - %(message)s')
 
+numrange = "236491-713787"
 
 def parse(numrange):
+    count = 0
     r = numrange.split('-')
     for i in range(int(r[0]),int(r[1])+1):
         valid = True
@@ -15,13 +19,16 @@ def parse(numrange):
             elif fullstring[c] == fullstring[c+1]:
                 adjacent = True
             if int(fullstring[c]) <= int(fullstring[c+1]):
-                neverdecrease = True
+                pass
             else:
                 neverdecrease = False
 
-            print("debug: current: " + str(fullstring[c]) + " next: " + str(fullstring[c + 1]))
-        print(str(i) + " adjacent check : " + str(adjacent))
-        print(str(i) + " neverdecrease check : " + str(neverdecrease))
+            logger.debug("debug: current: " + str(fullstring[c]) + " next: " + str(fullstring[c + 1]))
+        logger.debug(str(i) + " adjacent check : " + str(adjacent))
+        logger.debug(str(i) + " neverdecrease check : " + str(neverdecrease))
+        if adjacent and neverdecrease:
+            count = count + 1
+    return count
 
-
-parse(numrange)
+count = parse(numrange)
+print("Total matches: " + str(count))
