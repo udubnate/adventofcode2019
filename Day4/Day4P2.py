@@ -10,6 +10,7 @@ def parse(numrange):
     for i in range(int(r[0]),int(r[1])+1):
         adjacent = hasAdjacent(i)
         decreasecheck = neverDecrease(i)
+       # countTwoMatches = countAll(i)
         if adjacent and decreasecheck:
             count = count + 1
     return count
@@ -19,7 +20,8 @@ def hasAdjacent(input):
     inputstr = str(input)
     for i in range(len(inputstr)-1):
          if inputstr[i] == inputstr[i+1]:
-            return True
+            if countChar(inputstr, inputstr[i]) == 2:
+                return True
     return False
 
 
@@ -32,6 +34,14 @@ def neverDecrease(input):
          else:
              return False
     return True
+
+def countChar(input, c):
+    count = 0
+    inputstr = str(input)
+    for i in range(len(inputstr)):
+        if inputstr[i] == c:
+            count = count + 1
+    return count
 
 count = parse(numrange)
 print("Total matches: " + str(count))
